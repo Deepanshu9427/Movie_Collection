@@ -6,12 +6,11 @@ export default function MovieDetailsPage() {
     const { imdbId } = useParams();
     const [movie, setMovie] = useState<any>(null);
     const [newReview, setNewReview] = useState("");
-
+    // This looks for an environment variable first; if not found, it falls back to localhost.
+    const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8080';
     useEffect(() => {
         const fetchMovie = async () => {
             try {
-                // This looks for an environment variable first; if not found, it falls back to localhost.
-                const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8080';
                 // 2. Update the fetch line to use the variable
                 const res = await fetch(`${apiBaseUrl}/api/v1/movies/${imdbId}`);
                 const data = await res.json();
@@ -26,7 +25,7 @@ export default function MovieDetailsPage() {
 
     const handleAddReview = async () => {
         try {
-            const res = await fetch("http://localhost:8080/api/v1/reviews", {
+            const res = await fetch(`${apiBaseUrl}/api/v1/reviews`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
