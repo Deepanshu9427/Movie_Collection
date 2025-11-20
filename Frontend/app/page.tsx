@@ -28,7 +28,7 @@ export default function MoviesGrid() {
               const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8080';
 
               // 2. Update the fetch line to use the variable
-              const res = await fetch(`${apiBaseUrl}/api/v1/movies/`);
+              const res = await fetch(`${apiBaseUrl}/api/v1/movies`);
                 if (!res.ok) {
                     throw new Error(`HTTP error! Status: ${res.status}`);
                 }
