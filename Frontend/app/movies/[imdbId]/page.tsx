@@ -10,7 +10,10 @@ export default function MovieDetailsPage() {
     useEffect(() => {
         const fetchMovie = async () => {
             try {
-                const res = await fetch(`http://localhost:8080/api/v1/movies/${imdbId}`);
+                // This looks for an environment variable first; if not found, it falls back to localhost.
+                const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8080';
+                // 2. Update the fetch line to use the variable
+                const res = await fetch(`${apiBaseUrl}/api/v1/movies/${imdbId}`);
                 const data = await res.json();
                 setMovie(data);
             } catch (error) {
